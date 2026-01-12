@@ -5,13 +5,62 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>rotpfau</title>
+    <style>
+      .omada-connect-btn {
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 18px 40px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+        z-index: 9999;
+        display: none;
+      }
+      
+      .omada-connect-btn:hover {
+        transform: translateX(-50%) translateY(-3px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+      }
+      
+      .omada-connect-btn:active {
+        transform: translateX(-50%) translateY(-1px);
+      }
+      
+      .omada-connect-btn.show {
+        display: block;
+        animation: slideUp 0.5s ease-out;
+      }
+      
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Omada Authorization Button -->
+    <button id="omadaConnectBtn" class="omada-connect-btn">İnternete Bağlan</button>
+    
     <script type="module" src="/src/main.tsx"></script>
     
     <script>
-    // Omada Auto-Authorization Script
+    // Omada Authorization Script with Button
     (function() {
         // Parse URL parameters from Omada
         const params = new URLSearchParams(window.location.search);
@@ -25,41 +74,55 @@
         
         // Only run if Omada parameters are present
         if (clientMac && site) {
-            console.log('Omada parameters detected, auto-authorizing...');
+            console.log('Omada parameters detected');
             
-            // Construct authorization URL
-            const authUrl = `http://192.168.0.1:8080/portal/auth`;
+            // Show the connect button
+            const connectBtn = document.getElementById('omadaConnectBtn');
+            connectBtn.classList.add('show');
             
-            // Create authorization form data
-            const formData = new URLSearchParams({
-                clientMac: clientMac,
-                clientIp: clientIp,
-                apMac: apMac,
-                ssidName: ssidName,
-                radioId: radioId,
-                site: site,
-                t: t,
-                action: 'authorize'
+            // Handle button click
+            connectBtn.addEventListener('click', function() {
+                console.log('Authorization button clicked');
+                
+                // Disable button to prevent multiple clicks
+                connectBtn.disabled = true;
+                connectBtn.textContent = 'Bağlanıyor...';
+                connectBtn.style.opacity = '0.7';
+                
+                // Construct authorization URL
+                const authUrl = `http://192.168.0.1:8080/portal/auth`;
+                
+                // Create authorization form data
+                const formData = new URLSearchParams({
+                    clientMac: clientMac,
+                    clientIp: clientIp,
+                    apMac: apMac,
+                    ssidName: ssidName,
+                    radioId: radioId,
+                    site: site,
+                    t: t,
+                    action: 'authorize'
+                });
+                
+                // Send authorization request
+                fetch(authUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData.toString(),
+                    mode: 'no-cors'
+                }).then(() => {
+                    console.log('Authorization sent');
+                }).catch(() => {
+                    console.log('Authorization request completed');
+                });
+                
+                // Wait 2 seconds then redirect
+                setTimeout(() => {
+                    window.location.href = 'https://aps1-omada-essential-controller.tplinkcloud.com';
+                }, 2000);
             });
-            
-            // Send authorization request
-            fetch(authUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: formData.toString(),
-                mode: 'no-cors'
-            }).then(() => {
-                console.log('Authorization sent');
-            }).catch(() => {
-                console.log('Authorization request completed');
-            });
-            
-            // Wait 5 seconds then redirect to your Omada controller
-            setTimeout(() => {
-                window.location.href = 'https://aps1-omada-essential-controller.tplinkcloud.com';
-            }, 5000);
         }
     })();
     </script>

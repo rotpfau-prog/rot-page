@@ -3,88 +3,75 @@ import './OmadaPortal.css';
 
 export default function OmadaPortal() {
   const [isAnimated, setIsAnimated] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     setTimeout(() => setIsAnimated(true), 100);
   }, []);
 
   const handleConnect = () => {
-    // Burada authentication olmadan sadece redirect yapılacak
     window.location.href = 'https://aps1-omada-essential-controller.tplinkcloud.com';
   };
 
   return (
-    <div className="omada-container">
+    <div className="landing-container">
       {/* Background Image */}
-      <div className="background-layer" />
+      <div className="background-image" />
+      <div className="background-overlay" />
 
-      {/* Main Content */}
-      <div className="main-content">
-        {/* Logo Section */}
-        <div className={`logo-section ${isAnimated ? 'slide-in' : ''}`}>
+      {/* Content */}
+      <div className={`content-wrapper ${isAnimated ? 'fade-in' : ''}`}>
+        {/* Logo */}
+        <div className="logo-wrapper">
           <img
-            src="/logo.png"
+            src="/rotpfau_yılbası.png"
             alt="rotpfau"
-            className="logo-image"
+            className="brand-logo"
           />
         </div>
 
-        {/* Content Grid */}
-        <div className={`content-grid ${mounted ? 'fade-in' : ''}`}>
-          {/* Welcome Card - Sol Taraf */}
-          <div className="welcome-card">
-            <h1 className="welcome-title">Hoş Geldiniz!</h1>
-            <p className="welcome-text">
-              Rotpfau'ya hoş geldiniz. Kahvenizi yudumlayın, rahatça çalışın 
-              ve keyifli vakit geçirin. Sıcak bir atmosferde hizmetinizdeyiz.
+        {/* Main Heading */}
+        <h1 className="main-heading">
+          Hoş Geldiniz
+        </h1>
+
+        {/* Description */}
+        <p className="main-description">
+          Kahvenizi yudumlayın, rahatça çalışın ve keyifli vakit geçirin.
+          <br />
+          Ücretsiz Wi-Fi ile hizmetinizdeyiz.
+        </p>
+
+        {/* Connect Button */}
+        <button onClick={handleConnect} className="primary-button">
+          İnternete Bağlan
+        </button>
+
+        {/* Info Cards */}
+        <div className="info-grid">
+          <div className="info-card">
+            <div className="card-icon">📋</div>
+            <h3 className="card-title">Masa Kullanımı</h3>
+            <p className="card-description">
+              Masalarımız tüm misafirlerimizin kullanımına açıktır. 
+              Kişisel eşyalarla uzun süreli yer tutmaktan kaçınınız.
             </p>
-            <p className="welcome-text">
-              Ücretsiz Wi-Fi'ımızdan faydalanabilir, toplantılarınızı 
-              yapabilir veya arkadaşlarınızla buluşabilirsiniz.
-            </p>
-            <button onClick={handleConnect} className="connect-button">
-              İnternete Bağlan
-            </button>
           </div>
 
-          {/* Rules Card - Sağ Taraf */}
-          <div className="rules-card">
-            <div className="rule-item">
-              <h2 className="rule-title">Masa Kullanımı</h2>
-              <p className="rule-text">
-                Masalarımız tüm misafirlerimizin kullanımına açıktır.
-              </p>
-              <p className="rule-text">
-                Kişisel eşyalarla uzun süreli yer tutmak ve masa kullanımını 
-                engellemekten kaçınmanızı rica ederiz.
-              </p>
-              <p className="rule-text">
-                Anlayışınız için teşekkür ederiz.
-              </p>
-            </div>
-
-            <div className="rule-divider"></div>
-
-            <div className="rule-item">
-              <h2 className="rule-title">Dışarıdan Yiyecek & İçecek</h2>
-              <p className="rule-text">
-                Mekanımıza dışarıdan yiyecek ve içecek getirilmemektedir.
-              </p>
-              <p className="rule-text">
-                Size en iyi deneyimi sunabilmek için bu konuda anlayışınızı 
-                rica ederiz.
-              </p>
-            </div>
+          <div className="info-card">
+            <div className="card-icon">🍽️</div>
+            <h3 className="card-title">Dışarıdan Yiyecek & İçecek</h3>
+            <p className="card-description">
+              Mekanımıza dışarıdan yiyecek ve içecek getirilmemektedir. 
+              Anlayışınız için teşekkür ederiz.
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Copyright Footer */}
-      <div className="copyright-section">
-        <p className="copyright-text">© 2025 rotpfau - all rights reserved.</p>
-      </div>
+      {/* Footer */}
+      <footer className="page-footer">
+        <p>© 2025 rotpfau - all rights reserved.</p>
+      </footer>
     </div>
   );
 }

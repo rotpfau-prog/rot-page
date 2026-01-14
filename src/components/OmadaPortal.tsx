@@ -23,7 +23,7 @@ export default function OmadaPortal() {
         {/* Logo */}
         <div className="logo-wrapper">
           <img
-            src="/rotpfau_yılbası.png"
+            src="/logo.png"
             alt="rotpfau"
             className="brand-logo"
           />

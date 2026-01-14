@@ -10,51 +10,80 @@ export default function OmadaPortal() {
     setTimeout(() => setIsAnimated(true), 100);
   }, []);
 
+  const handleConnect = () => {
+    // Burada authentication olmadan sadece redirect yapılacak
+    window.location.href = 'https://aps1-omada-essential-controller.tplinkcloud.com';
+  };
+
   return (
     <div className="omada-container">
       {/* Background Image */}
       <div className="background-layer" />
 
-      {/* Logo Section */}
-      <div className={`logo-section ${isAnimated ? 'slide-in' : ''}`}>
-        <div className="logo-container">
+      {/* Main Content */}
+      <div className="main-content">
+        {/* Logo Section */}
+        <div className={`logo-section ${isAnimated ? 'slide-in' : ''}`}>
           <img
-            src="/logo.png"
+            src="/rotpfau_yılbası.png"
             alt="rotpfau"
             className="logo-image"
           />
         </div>
-      </div>
 
-      {/* Info Cards */}
-      <div className={`cards-container ${mounted ? 'fade-in' : ''}`}>
-        <div className="info-card">
-          <h2 className="card-title">Masa Kullanımı</h2>
-          <p className="card-text">
-            Masalarımız tüm misafirlerimizin kullanımına açıktır.
-          </p>
-          <p className="card-text">
-            Kişisel eşyalarla uzun süreli yer tutmak ve masa kullanımını engellemekten kaçınmanızı rica ederiz.
-          </p>
-          <p className="card-text">
-            Anlayışınız için teşekkür ederiz.
-          </p>
-        </div>
+        {/* Content Grid */}
+        <div className={`content-grid ${mounted ? 'fade-in' : ''}`}>
+          {/* Welcome Card - Sol Taraf */}
+          <div className="welcome-card">
+            <h1 className="welcome-title">Hoş Geldiniz!</h1>
+            <p className="welcome-text">
+              Rotpfau'ya hoş geldiniz. Kahvenizi yudumlayın, rahatça çalışın 
+              ve keyifli vakit geçirin. Sıcak bir atmosferde hizmetinizdeyiz.
+            </p>
+            <p className="welcome-text">
+              Ücretsiz Wi-Fi'ımızdan faydalanabilir, toplantılarınızı 
+              yapabilir veya arkadaşlarınızla buluşabilirsiniz.
+            </p>
+            <button onClick={handleConnect} className="connect-button">
+              İnternete Bağlan
+            </button>
+          </div>
 
-        <div className="info-card">
-          <h2 className="card-title">Dışarıdan Yiyecek & İçecek</h2>
-          <p className="card-text">
-            Mekanımıza dışarıdan yiyecek ve içecek getirilmemektedir.
-          </p>
-          <p className="card-text">
-            Size en iyi deneyimi sunabilmek için bu konuda anlayışınızı rica ederiz.
-          </p>
+          {/* Rules Card - Sağ Taraf */}
+          <div className="rules-card">
+            <div className="rule-item">
+              <h2 className="rule-title">Masa Kullanımı</h2>
+              <p className="rule-text">
+                Masalarımız tüm misafirlerimizin kullanımına açıktır.
+              </p>
+              <p className="rule-text">
+                Kişisel eşyalarla uzun süreli yer tutmak ve masa kullanımını 
+                engellemekten kaçınmanızı rica ederiz.
+              </p>
+              <p className="rule-text">
+                Anlayışınız için teşekkür ederiz.
+              </p>
+            </div>
+
+            <div className="rule-divider"></div>
+
+            <div className="rule-item">
+              <h2 className="rule-title">Dışarıdan Yiyecek & İçecek</h2>
+              <p className="rule-text">
+                Mekanımıza dışarıdan yiyecek ve içecek getirilmemektedir.
+              </p>
+              <p className="rule-text">
+                Size en iyi deneyimi sunabilmek için bu konuda anlayışınızı 
+                rica ederiz.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Copyright Footer */}
       <div className="copyright-section">
-        <p className="copyright-text">rotpfau all rights reserved.</p>
+        <p className="copyright-text">© 2025 rotpfau - all rights reserved.</p>
       </div>
     </div>
   );

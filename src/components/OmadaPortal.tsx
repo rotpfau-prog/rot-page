@@ -25,7 +25,7 @@ export default function OmadaPortal() {
         {/* Logo Section */}
         <div className={`logo-section ${isAnimated ? 'slide-in' : ''}`}>
           <img
-            src="/rotpfau_yılbası.png"
+            src="/logo.png"
             alt="rotpfau"
             className="logo-image"
           />

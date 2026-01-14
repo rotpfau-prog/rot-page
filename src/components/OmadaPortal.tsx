@@ -9,7 +9,67 @@ export default function OmadaPortal() {
   }, []);
 
   const handleConnect = () => {
-    window.location.href = 'https://aps1-omada-essential-controller.tplinkcloud.com';
+    // Parse Omada URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const clientMac = params.get('clientMac');
+    const clientIp = params.get('clientIp');
+    const apMac = params.get('apMac');
+    const ssidName = params.get('ssidName');
+    const radioId = params.get('radioId');
+    const site = params.get('site');
+    const t = params.get('t');
+    const redirectUrl = params.get('redirectUrl');
+
+    // If Omada parameters exist, authorize
+    if (clientMac && site) {
+      // Construct authorization URL
+      const authUrl = `http://192.168.0.1:8080/portal/auth`;
+      
+      // Create authorization form data
+      const formData = new URLSearchParams({
+        clientMac: clientMac,
+        clientIp: clientIp || '',
+        apMac: apMac || '',
+        ssidName: ssidName || '',
+        radioId: radioId || '',
+        site: site,
+        t: t || '',
+        action: 'authorize'
+      });
+
+      // Send authorization request
+      fetch(authUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString(),
+        mode: 'no-cors'
+      }).then(() => {
+        console.log('Authorization sent');
+        // Redirect to original URL or default
+        setTimeout(() => {
+          if (redirectUrl) {
+            window.location.href = decodeURIComponent(redirectUrl);
+          } else {
+            window.location.href = 'http://www.google.com';
+          }
+        }, 1000);
+      }).catch(() => {
+        console.log('Authorization completed');
+        // Still redirect even if there's an error
+        setTimeout(() => {
+          if (redirectUrl) {
+            window.location.href = decodeURIComponent(redirectUrl);
+          } else {
+            window.location.href = 'http://www.google.com';
+          }
+        }, 1000);
+      });
+    } else {
+      // No Omada parameters, just redirect
+      window.location.href = 'https://aps1-omada-essential-controller.tplinkcloud.com';
+    }
   };
 
   return (
@@ -23,7 +83,7 @@ export default function OmadaPortal() {
         {/* Logo */}
         <div className="logo-wrapper">
           <img
-            src="/logo.png"
+            src="/rotpfau_yılbası.png"
             alt="rotpfau"
             className="brand-logo"
           />
@@ -61,7 +121,7 @@ export default function OmadaPortal() {
             <div className="card-icon">🍽️</div>
             <h3 className="card-title">Dışarıdan Yiyecek & İçecek</h3>
             <p className="card-description">
-              Kafemize dışarıdan yiyecek ve içecek getirilmemektedir. 
+              Mekanımıza dışarıdan yiyecek ve içecek getirilmemektedir. 
               Anlayışınız için teşekkür ederiz.
             </p>
           </div>

@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-/* Background Layer with Illustration */
+/* Background Layer with Photo */
 .background-layer {
   position: absolute;
   top: 0;
@@ -18,19 +18,28 @@
   width: 100%;
   height: 100%;
   background:
-    linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%),
-    url('/bg.png');
+    linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%),
+    url('/rotpfau_fotograf_1.png');
   background-size: cover;
   background-position: center;
   z-index: 0;
 }
 
+/* Main Content */
+.main-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1400px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
 /* Logo Section */
 .logo-section {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  z-index: 10;
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -39,57 +48,50 @@
   opacity: 1;
 }
 
-.logo-container {
-  padding: 0;
-}
-
 .logo-image {
   display: block;
   height: auto;
-  max-width: 240px;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  max-width: 400px;
+  width: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
 }
 
-/* Cards Container */
-.cards-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  z-index: 5;
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 20px;
-  max-height: 90vh;
-  overflow-y: auto;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
 }
 
-.cards-container.fade-in {
+.content-grid.fade-in {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Info Card - Modern Design */
-.info-card {
-  width: 90vw;
-  max-width: 520px;
+/* Welcome Card - Sol Taraf */
+.welcome-card {
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 24px;
-  padding: 40px 44px;
+  padding: 50px 45px;
   box-shadow:
     0 25px 70px rgba(0, 0, 0, 0.35),
-    0 10px 30px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+    0 10px 30px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.info-card::before {
+.welcome-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -100,151 +102,230 @@
   border-radius: 24px 24px 0 0;
 }
 
-.info-card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.4),
-    0 15px 40px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
-}
-
-.card-title {
-  font-size: 26px;
+.welcome-title {
+  font-size: 42px;
   font-weight: 700;
   background: linear-gradient(135deg, #F90303 0%, #CC0000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin: 0 0 20px 0;
-  letter-spacing: -0.3px;
-  position: relative;
-  padding-bottom: 14px;
-  font-family: 'Inter', sans-serif;
+  margin: 0 0 30px 0;
+  letter-spacing: -0.5px;
 }
 
-.card-title::after {
+.welcome-text {
+  font-size: 17px;
+  color: #2c3e50;
+  line-height: 1.8;
+  margin: 0 0 20px 0;
+  font-weight: 400;
+}
+
+.welcome-text:last-of-type {
+  margin-bottom: 40px;
+}
+
+/* Connect Button */
+.connect-button {
+  background: linear-gradient(135deg, #F90303 0%, #CC0000 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 18px 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(249, 3, 3, 0.4);
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+  align-self: flex-start;
+}
+
+.connect-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(249, 3, 3, 0.6);
+}
+
+.connect-button:active {
+  transform: translateY(-1px);
+}
+
+/* Rules Card - Sağ Taraf */
+.rules-card {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 50px 45px;
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.rules-card::before {
   content: '';
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
-  width: 50px;
-  height: 3px;
-  background: linear-gradient(90deg, #F90303 0%, transparent 100%);
-  border-radius: 2px;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #F90303 0%, #FF4444 100%);
+  border-radius: 24px 24px 0 0;
 }
 
-.card-text {
+.rule-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rule-title {
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #F90303 0%, #CC0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.rule-text {
   font-size: 15px;
   color: #2c3e50;
   line-height: 1.7;
-  margin: 0 0 14px 0;
+  margin: 0;
   font-weight: 400;
-  position: relative;
   padding-left: 20px;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.1px;
+  position: relative;
 }
 
-.card-text::before {
+.rule-text::before {
   content: '•';
   position: absolute;
   left: 0;
   color: #F90303;
   font-weight: bold;
-  font-size: 20px;
-  line-height: 1.8;
+  font-size: 18px;
 }
 
-.card-text:last-child {
-  margin-bottom: 0;
-  font-weight: 500;
-  color: #34495e;
+.rule-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #e0e0e0 20%, #e0e0e0 80%, transparent 100%);
+  margin: 10px 0;
 }
 
 /* Copyright Section */
 .copyright-section {
   position: absolute;
-  bottom: 24px;
-  left: 24px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
-  text-align: left;
+  text-align: center;
 }
 
 .copyright-text {
   color: rgba(255, 255, 255, 0.95);
   font-size: 12px;
   margin: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
   letter-spacing: 0.5px;
   font-weight: 500;
-  font-family: 'Inter', sans-serif;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .cards-container {
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
     gap: 24px;
-    padding: 16px;
-  }
-
-  .info-card {
-    padding: 32px 36px;
-  }
-
-  .card-title {
-    font-size: 24px;
-  }
-
-  .card-text {
-    font-size: 15px;
-  }
-
-  .logo-section {
-    bottom: 20px;
-    right: 20px;
-  }
-
-  .logo-container {
-    padding: 0;
   }
 
   .logo-image {
-    max-width: 200px;
+    max-width: 300px;
   }
 
-  .copyright-text {
-    font-size: 12px;
-    padding: 0 16px;
+  .welcome-title {
+    font-size: 36px;
+  }
+
+  .welcome-card,
+  .rules-card {
+    padding: 40px 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    gap: 30px;
+    padding: 30px 16px;
+  }
+
+  .logo-image {
+    max-width: 250px;
+  }
+
+  .welcome-card,
+  .rules-card {
+    padding: 32px 28px;
+  }
+
+  .welcome-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .welcome-text {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  .welcome-text:last-of-type {
+    margin-bottom: 32px;
+  }
+
+  .rule-title {
+    font-size: 20px;
+  }
+
+  .rule-text {
+    font-size: 14px;
+  }
+
+  .connect-button {
+    width: 100%;
+    text-align: center;
   }
 }
 
 @media (max-width: 480px) {
-  .cards-container {
-    gap: 20px;
-    padding: 12px;
+  .logo-image {
+    max-width: 200px;
   }
 
-  .info-card {
-    padding: 28px 32px;
+  .welcome-card,
+  .rules-card {
+    padding: 28px 24px;
     border-radius: 20px;
   }
 
-  .card-title {
-    font-size: 22px;
-    margin-bottom: 16px;
+  .welcome-title {
+    font-size: 28px;
   }
 
-  .card-text {
+  .welcome-text {
     font-size: 14px;
-    padding-left: 18px;
   }
 
-  .logo-container {
-    padding: 0;
-  }
-
-  .logo-image {
-    max-width: 160px;
+  .rule-title {
+    font-size: 18px;
   }
 
   .copyright-text {
@@ -262,34 +343,4 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-/* Smooth Scrollbar */
-.cards-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.cards-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-}
-
-.cards-container::-webkit-scrollbar-thumb {
-  background: rgba(249, 3, 3, 0.5);
-  border-radius: 10px;
-}
-
-.cards-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(249, 3, 3, 0.7);
 }

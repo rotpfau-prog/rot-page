@@ -24,7 +24,7 @@ export default function OmadaPortal() {
     if (clientMac && site) {
       // Construct authorization URL
     //  const authUrl = `http://192.168.50.1:8088/portal/auth`;
-      const authUrl = `omada://aps1-omada-essential-device.tplinkcloud.com?dPort=29810&mPort=443&omadacId=69344d80cb4d110814c5e602`
+      const authUrl = `http://192.168.50.1:8088/portal/auth`
       // Create authorization form data
       const formData = new URLSearchParams({
         clientMac: clientMac,
@@ -68,7 +68,7 @@ export default function OmadaPortal() {
       });
     } else {
       // No Omada parameters, just redirect
-      window.location.href = 'https://aps1-omada-essential-controller.tplinkcloud.com';
+      window.location.href = 'http://192.168.50.1:8088/portal/auth';
     }
   };
 

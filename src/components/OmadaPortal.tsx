@@ -23,8 +23,8 @@ export default function OmadaPortal() {
     // If Omada parameters exist, authorize
     if (clientMac && site) {
       // Construct authorization URL
-      const authUrl = `https://aps1-omada-essential-controller.tplinkcloud.com`;
-      
+    //  const authUrl = `https://aps1-omada-essential-controller.tplinkcloud.com`;
+      const authUrl = `omada://aps1-omada-essential-device.tplinkcloud.com?dPort=29810&mPort=443&omadacId=69344d80cb4d110814c5e602`
       // Create authorization form data
       const formData = new URLSearchParams({
         clientMac: clientMac,

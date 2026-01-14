@@ -61,7 +61,7 @@ export default function OmadaPortal() {
             <div className="card-icon">🍽️</div>
             <h3 className="card-title">Dışarıdan Yiyecek & İçecek</h3>
             <p className="card-description">
-              Mekanımıza dışarıdan yiyecek ve içecek getirilmemektedir. 
+              Kafemize dışarıdan yiyecek ve içecek getirilmemektedir. 
               Anlayışınız için teşekkür ederiz.
             </p>
           </div>
